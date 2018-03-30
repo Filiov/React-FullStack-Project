@@ -18,10 +18,10 @@ class Header extends Component {
             <div>
                 <header>
                     <div className="open_nav">
-                        <img src="/images/menu.png" alt="menu" onClick={() => this.setState({ showNav: true })} style={{ width: '100px', padding: '10px', cursor: 'pointer' }}/>
+                        <img src="/images/menu.png" alt="menu" onClick={() => this.setState({ showNav: true })} style={{ width: '100px', padding: '10px', cursor: 'pointer' }} />
                     </div>
                     <Nav showNav={this.state.showNav} onHideNav={() => this.onHideNav()} />
-                    <Link to="/"><img src="/images/logo.png" alt="Logo" className="logo"/></Link>
+                    <Link to="/"><img src="/images/logo.png" alt="Logo" className="logo" /></Link>
                 </header>
             </div>
         );

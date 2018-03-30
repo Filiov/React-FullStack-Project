@@ -86,7 +86,7 @@ header .navItem span {
 
 
 .book_item .book_bubble {
-    background: #E91E63;
+    background: #2899c0;
     display: inline-block;
     padding: 3px 5px;
     border-radius: 3px;
@@ -120,7 +120,7 @@ header .navItem span {
     background: #dbdbdb;
     text-align: center;
     text-transform: uppercase;
-    color: #ffffff;
+    color: #2899c0;
     padding: 20px;
     font-weight: 500;
     cursor: pointer;
