@@ -8,6 +8,12 @@ export default function (state = {}, action) {
                 post: action.payload.post,
                 reviewer: action.payload.reviewer
             }
+        case 'CLEAR_POST_W_REVIEWER':
+            return {
+                ...state,
+                post: action.payload.post,
+                reviewer: action.payload.reviewer
+            }
         default:
             return state;
     }

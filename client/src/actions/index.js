@@ -39,3 +39,13 @@ export function getPostWithReviewer(id) {
         })
     }
 }
+
+export function clearPostWithReviewer() {
+    return {
+        type: 'CLEAR_POST_W_REVIEWER',
+        payload: {
+            post: {},
+            reviewer: {}
+        }
+    }
+}
