@@ -50,6 +50,23 @@ export function clearPostWithReviewer() {
     }
 }
 
+export function addPost(post) {
+    const request = axios.post('/api/news', post)
+        .then(response => response.data)
+        
+        return {
+            type:'ADD_POST',
+            payload: request
+        }
+}
+
+export function clearNewPost() {
+    return {
+        type: 'CLEAR_NEWPOST',
+        payload:{}
+    }
+}
+
 export function loginUser({ email, password }) {
     const request = axios.post('/api/login', { email, password })
         .then(response => response.data)

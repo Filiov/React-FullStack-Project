@@ -14,6 +14,10 @@ export default function (state = {}, action) {
                 post: action.payload.post,
                 reviewer: action.payload.reviewer
             }
+        case 'ADD_POST':
+            return { ...state, newpost: action.payload }
+        case 'CLEAR_NEWPOST':
+            return { ...state, newpost: action.payload }
         default:
             return state;
     }

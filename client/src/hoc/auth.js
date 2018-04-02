@@ -23,7 +23,7 @@ export default function (ComposedClass, reload) {
                     this.props.history.push('/login');
                 }
             } else {
-                if (reload == false) {
+                if (reload === false) {
                     this.props.history.push('/user');
                 }
             }
