@@ -120,7 +120,7 @@ header .navItem span {
     background: #dbdbdb;
     text-align: center;
     text-transform: uppercase;
-    color: #2899c0;
+    color: rgb(40, 153, 192);
     padding: 20px;
     font-weight: 500;
     cursor: pointer;

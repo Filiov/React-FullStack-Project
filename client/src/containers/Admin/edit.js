@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { addPost, clearNewPost } from '../../actions';
+import { getPost, updatePost, clearPost, deleteReview } from '../../actions';
 
-class AddReview extends Component {
+class EditReview extends PureComponent {
 
     state = {
         formdata: {
+            _id: this.props.match.params.id,
             title: '',
             author: '',
             review: '',
@@ -25,29 +26,59 @@ class AddReview extends Component {
         })
     }
 
-    showNewPost = (post) => (
-        post.post ? 
-            <div className="conf_link">Cool! <Link to={`/allNews/${post.newsId}`}>Click here to see the post</Link></div>
-        :null
-    )
-
     submitForm = (e) => {
         e.preventDefault();
-        this.props.dispatch(addPost({
-            ...this.state.formdata,
-            ownerId: this.props.user.login.id
-        }))
+        this.props.dispatch(updatePost(this.state.formdata))
+    }
+
+    deletePost = () => {
+        this.props.dispatch(deleteReview(this.props.match.params.id))
+    }
+
+    redirectUser = () => {
+        setTimeout(() => {
+            this.props.history.push('/user/user-reviews')
+        }, 1000)
+    }
+
+    componentWillMount() {
+        this.props.dispatch(getPost(this.props.match.params.id))
+    }
+
+    componentWillReceiveProps(nextProps) {
+        let post = nextProps.news.post;
+        this.setState({
+            formdata: {
+                _id: post._id,
+                title: post.title,
+                author: post.author,
+                review: post.review,
+                rating: post.rating,
+                category: post.category
+            }
+        })
     }
 
     componentWillUnmount() {
-        this.props.dispatch(clearNewPost())
+        this.props.dispatch(clearPost())
     }
 
     render() {
+        let news = this.props.news;
         return (
             <div className="rl_container article">
+                {
+                    news.updatePost ?
+                        <div className="edit_confirm">Post Updated! <Link to={`/allNews/${news.post._id}`}>Click here to see your post</Link></div>
+                        : null
+                }
+                {
+                    news.postDeleted ?  
+                        <div className="red_tag">Post Deleted {this.redirectUser()}</div>
+                        : null
+                }
                 <form onSubmit={this.submitForm}>
-                    <h2>Add a<img src="/images/reviews.png" alt="Login" className="login_image" /> Review</h2>
+                    <h2>Edit<img src="/images/edit.png" alt="Login" className="login_image" /> Review</h2>
                     <div className="form_element">
                         <input type="text" placeholder="Enter title" value={this.state.formdata.title} onChange={(event) => this.handleInput(event, 'title')} />
                     </div>
@@ -67,12 +98,12 @@ class AddReview extends Component {
                             <option val="5">5</option>
                         </select>
                     </div>
-                    <button type="submit"><i className="fa fa-star"></i>&nbsp;&nbsp;Add Review</button>
-                    {
-                        this.props.news.newpost ? 
-                            this.showNewPost(this.props.news.newpost)
-                        :null
-                    }
+                    <button type="submit"><i className="fa fa-edit"></i>&nbsp;&nbsp;Edit Review</button>
+                    <div className="delete_post">
+                        <div className="button" onClick={this.deletePost}>
+                            <i className="fa fa-trash"></i>&nbsp;&nbsp;Delete Review
+                        </div>
+                    </div>
                 </form>
             </div>
         );
@@ -85,4 +116,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(AddReview)
+export default connect(mapStateToProps)(EditReview)

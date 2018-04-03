@@ -53,17 +53,68 @@ export function clearPostWithReviewer() {
 export function addPost(post) {
     const request = axios.post('/api/news', post)
         .then(response => response.data)
-        
-        return {
-            type:'ADD_POST',
-            payload: request
-        }
+
+    return {
+        type: 'ADD_POST',
+        payload: request
+    }
 }
 
 export function clearNewPost() {
     return {
         type: 'CLEAR_NEWPOST',
-        payload:{}
+        payload: {}
+    }
+}
+
+export function getUserPosts(userId) {
+    const request = axios.get(`/api/user_posts?user=${userId}`)
+        .then(response => response.data)
+
+    return {
+        type: 'GET_USER_POSTS',
+        payload: request
+    }
+}
+
+export function getPost(id) {
+    const request = axios.get(`/api/getNews?id=${id}`)
+        .then(response => response.data);
+
+    return {
+        type: 'GET_POST',
+        payload: request
+    }
+}
+
+export function updatePost(data) {
+    const request = axios.post(`/api/news_update`, data)
+        .then(response => response.data);
+
+    return {
+        type: 'UPDATE_POST',
+        payload: request
+    }
+}
+
+export function deleteReview(id) {
+    const request = axios.delete(`/api/delete_news?id=${id}`)
+        .then(response => response.data);
+
+    return {
+        type: 'DELETE_POST',
+        payload: request
+    }
+}
+
+export function clearPost() {
+    return {
+        type: 'CLEAR_POST',
+        payload: {
+            book: null,
+            updatePost: false,
+            postDeleted: false
+        }
     }
 }
 
