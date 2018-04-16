@@ -10,6 +10,7 @@ import User from './components/Admin';
 import AddReview from './containers/Admin/add'; 
 import UserPosts from './components/Admin/userPosts';
 import EditReview from './containers/Admin/edit';
+import Register from './containers/Admin/register';
 
 const Routes = () => {
     return (
@@ -19,6 +20,7 @@ const Routes = () => {
                 <Route path="/login" exact component={Auth(Login, false)} />
                 <Route path="/user" exact component={Auth(User, true)} />
                 <Route path="/user/add" exact component={Auth(AddReview, true)} />
+                <Route path="/user/register" exact component={Auth(Register, true)} />
                 <Route path="/user/edit-post/:id" exact component={Auth(EditReview, true)} />
                 <Route path="/allNews/:id" component={Auth(PostView, null)} />
                 <Route path="/user/user-reviews" exact component={Auth(UserPosts, true)} />
